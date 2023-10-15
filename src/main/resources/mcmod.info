@@ -1,0 +1,16 @@
+[
+{
+  "modid": "vista_railway",
+  "name": "Vista Railway",
+  "description": "A Next-Gen Railway Mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Vastsea", "xkball"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
