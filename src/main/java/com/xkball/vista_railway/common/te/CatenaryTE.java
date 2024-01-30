@@ -51,6 +51,9 @@ public class CatenaryTE extends SyncedTE{
         if(!this.getWorld().isRemote){
             writeCustomData(0,this::writeInitialSyncData);
         }
+        else{
+            this.scheduleRenderUpdate();
+        }
     }
     
     @Override

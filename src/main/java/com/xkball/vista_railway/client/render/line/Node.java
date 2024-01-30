@@ -1,6 +1,5 @@
 package com.xkball.vista_railway.client.render.line;
 
-
 import com.xkball.vista_railway.utils.RenderUtils;
 import net.minecraft.util.EnumFacing;
 import org.lwjgl.util.vector.Vector2f;
