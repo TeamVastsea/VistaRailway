@@ -1,0 +1,20 @@
+vista_railway.catenary.node_count=Node Count: %d
+vista_railway.catenary.style=Catenary Style: %s
+vista_railway.catenary.not_selected=Not set yet
+vista_railway.gui.style_selection=Style Selection
+vista_railway.gui.style_config=Style Config
+vista_railway.gui.cancel=Cancel
+vista_railway.gui.apply=Apply
+vista_railway.gui.confirm=Confirm
+vista_railway.gui.selected=Selected
+vista_railway.gui.offset=Render Offset:
+vista_railway.gui.y_rotation=Y Axis Rotation:
+vista_railway.gui.node_edit=%s Connect Node Position:
+vista_railway.gui.1=First
+vista_railway.gui.2=Second
+vista_railway.gui.3=Third
+vista_railway.gui.4=Fourth
+vista_railway.gui.relative_pos_save=Relative Position <-- Absolute Position
+vista_railway.gui.absolute_pos_save=Relative Position --> Absolute Position
+
+vista_railway.catenary.name.default=Default

@@ -1,0 +1,20 @@
+vista_railway.catenary.node_count=接触网节点数量: %d
+vista_railway.catenary.style=名称: %s
+vista_railway.catenary.not_selected=未设置
+vista_railway.gui.style_selection=样式选择
+vista_railway.gui.style_config=样式配置
+vista_railway.gui.cancel=取消
+vista_railway.gui.apply=应用
+vista_railway.gui.confirm=确认
+vista_railway.gui.selected=已选择
+vista_railway.gui.offset=渲染位移:
+vista_railway.gui.y_rotation=绕Y轴旋转:
+vista_railway.gui.node_edit=第%s连接节点位置:
+vista_railway.gui.1=一
+vista_railway.gui.2=二
+vista_railway.gui.3=三
+vista_railway.gui.4=四
+vista_railway.gui.relative_pos_save=相对位置 <-- 绝对位置
+vista_railway.gui.absolute_pos_save=相对位置 --> 绝对位置
+
+vista_railway.catenary.name.default=默认
