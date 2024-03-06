@@ -5,7 +5,10 @@ import com.xkball.vista_railway.client.gui.screen.VRBaseScreen;
 import com.xkball.vista_railway.utils.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public abstract class Vector3EditField<T> implements Renderable {
     
     protected GuiTextField textFieldX;

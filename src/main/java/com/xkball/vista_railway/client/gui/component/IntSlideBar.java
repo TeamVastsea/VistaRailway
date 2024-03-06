@@ -8,7 +8,10 @@ import com.xkball.vista_railway.utils.MathUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class IntSlideBar extends Gui implements Renderable {
     protected int x;
     protected int y;

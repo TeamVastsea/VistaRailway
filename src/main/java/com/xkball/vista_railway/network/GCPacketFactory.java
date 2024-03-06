@@ -1,5 +1,7 @@
 package com.xkball.vista_railway.network;
 
+import com.xkball.vista_railway.network.packets.KeyBoardInputToServerPacket;
+import com.xkball.vista_railway.network.packets.MouseWheelInputToServerPacket;
 import com.xkball.vista_railway.network.packets.OpenCatenaryGuiPacket;
 import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
 import io.netty.buffer.ByteBuf;
@@ -39,7 +41,9 @@ public enum GCPacketFactory {
     }
     public enum PacketType {
         REQUEST_CATENARY_DATA(RequestCatenaryDataPacket.class),
-        OPEN_CATENARY_EDIT_GUI(OpenCatenaryGuiPacket.class);
+        OPEN_CATENARY_EDIT_GUI(OpenCatenaryGuiPacket.class),
+        KEYBOARD_INPUT_TO_SERVER(KeyBoardInputToServerPacket.class),
+        MOUSE_WHEEL_INPUT_TO_SERVER(MouseWheelInputToServerPacket.class);
         //KEY_EVENT_TO_SERVER(KeyEventToServerPacket.class);
         //按需加枚举类型
         //然后就可以直接按数组进行索引了

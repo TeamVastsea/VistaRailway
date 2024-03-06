@@ -1,6 +1,7 @@
 vista_railway.catenary.node_count=接触网节点数量: %d
 vista_railway.catenary.style=名称: %s
 vista_railway.catenary.not_selected=未设置
+vista_railway.hot_key.item_switch_mode=调整物品模式
 vista_railway.gui.style_selection=样式选择
 vista_railway.gui.style_config=样式配置
 vista_railway.gui.cancel=取消
@@ -16,5 +17,21 @@ vista_railway.gui.3=三
 vista_railway.gui.4=四
 vista_railway.gui.relative_pos_save=相对位置 <-- 绝对位置
 vista_railway.gui.absolute_pos_save=相对位置 --> 绝对位置
+vista_railway.gui.node_state_override=位置保存模式覆写
+vista_railway.gui.node_state_override.none=不覆写
+vista_railway.gui.node_state_override.relative=相对位置
+vista_railway.gui.node_state_override.absolute=绝对位置
+vista_railway.gui.connecting_node=将连接的节点
+vista_railway.gui.connecting_pos=将连接的杆子
+vista_railway.gui.axis=选择轴:
+vista_railway.gui.interval=间隔:
+vista_railway.gui.translator.offset=当前位移
+vista_railway.tooltip.configurable_hud=这个物品有可配置的HUD
+vista_railway.tooltip.configurable_hud.row=使用 %s 键选择行
+vista_railway.tooltip.configurable_hud.column=使用鼠标滚轮选择列
 
+
+vista_railway.item.binder=绑定器
+
+key.category.vista_railway=Vista Railway
 vista_railway.catenary.name.default=默认

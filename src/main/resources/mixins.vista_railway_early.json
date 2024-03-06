@@ -1,0 +1,19 @@
+{
+  "minVersion": "0.8",
+  "package": "com.xkball.vista_railway.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "refmap": "mixins.vista_railway.refmap.json",
+  "mixins": [
+
+  ],
+  "client": [
+    "VRMixinGUIInGame"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+
+}

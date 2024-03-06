@@ -1,6 +1,7 @@
 vista_railway.catenary.node_count=Node Count: %d
 vista_railway.catenary.style=Catenary Style: %s
 vista_railway.catenary.not_selected=Not set yet
+vista_railway.hot_key.item_switch_mode=Switch Item Mode
 vista_railway.gui.style_selection=Style Selection
 vista_railway.gui.style_config=Style Config
 vista_railway.gui.cancel=Cancel
@@ -16,5 +17,21 @@ vista_railway.gui.3=Third
 vista_railway.gui.4=Fourth
 vista_railway.gui.relative_pos_save=Relative Position <-- Absolute Position
 vista_railway.gui.absolute_pos_save=Relative Position --> Absolute Position
+vista_railway.gui.node_state_override=PosSaveModeOverride
+vista_railway.gui.node_state_override.none=None
+vista_railway.gui.node_state_override.relative=Relative
+vista_railway.gui.node_state_override.absolute=Absolute
+vista_railway.gui.connecting_node=ConnectingNode
+vista_railway.gui.connecting_pos=ConnectingPos
+vista_railway.gui.axis=Choose Axis:
+vista_railway.gui.interval=Interval:
+vista_railway.gui.translator.offset=Current Offset:
+vista_railway.tooltip.configurable_hud=This item have configurable hud.
+vista_railway.tooltip.configurable_hud.row=Use %s key to choose rows.
+vista_railway.tooltip.configurable_hud.column=Use mouse wheel to choose columns.
 
+
+vista_railway.item.binder=Binder
+
+key.category.vista_railway=Vista Railway
 vista_railway.catenary.name.default=Default

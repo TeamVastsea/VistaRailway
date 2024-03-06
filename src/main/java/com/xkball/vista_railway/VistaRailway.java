@@ -1,7 +1,8 @@
 package com.xkball.vista_railway;
 
 
-import com.xkball.vista_railway.client.render.PoleRender;
+import com.xkball.vista_railway.client.input.KeyBoardInputHandler;
+import com.xkball.vista_railway.client.renderer.PoleRender;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
-import java.nio.file.Path;
 
 @Mod(modid = VistaRailway.MOD_ID, name = VistaRailway.NAME, version = VistaRailway.VERSION)
 public class VistaRailway {
@@ -30,15 +30,18 @@ public class VistaRailway {
     
     public static final File configDir = Loader.instance().getConfigDir();
     
+    public static int clientTick = 0;
+    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         GCNetworkManager.init();
+        KeyBoardInputHandler.init();
     }
     
     @Mod.EventBusSubscriber
     public static class ModEventHandler{
         
-        public static int clientTick = 0;
+        
         @SubscribeEvent
         @SideOnly(Side.CLIENT)
         public static void modelRegistryEvent(ModelRegistryEvent event) {

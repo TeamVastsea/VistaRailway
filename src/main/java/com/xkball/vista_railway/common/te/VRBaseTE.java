@@ -8,7 +8,6 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -81,16 +80,5 @@ public class VRBaseTE extends TileEntity implements ITickable {
         readFromNBT(pkt.getNbtCompound());
     }
     
-    public static BlockPos readBlockPos(NBTTagCompound compound,String name){
-        var x = compound.getInteger(name+"_x");
-        var y = compound.getInteger(name+"_y");
-        var z = compound.getInteger(name+"_z");
-        return new BlockPos(x,y,z);
-    }
-    
-    public static void writeBlockPos(NBTTagCompound compound,String name,BlockPos pos){
-        compound.setInteger(name+"_x",pos.getX());
-        compound.setInteger(name+"_y",pos.getY());
-        compound.setInteger(name+"_z",pos.getZ());
-    }
+ 
 }

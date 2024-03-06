@@ -4,8 +4,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.util.vector.Vector3f;
 
-import static com.xkball.vista_railway.common.te.VRBaseTE.readBlockPos;
-import static com.xkball.vista_railway.common.te.VRBaseTE.writeBlockPos;
+import static com.xkball.vista_railway.utils.NBTUtils.readBlockPos;
+import static com.xkball.vista_railway.utils.NBTUtils.writeBlockPos;
+
 
 public class PoleTEData {
     public int styleID = -1;

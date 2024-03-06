@@ -2,7 +2,10 @@ package com.xkball.vista_railway.client.gui.component;
 
 import com.xkball.vista_railway.client.gui.screen.VRBaseScreen;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class BlockPosEditField extends Vector3EditField<BlockPos> {
     
     protected BlockPos value;

@@ -1,13 +1,16 @@
 package com.xkball.vista_railway.common.block;
 
 import com.xkball.vista_railway.VistaRailway;
+import com.xkball.vista_railway.api.item.IOverlayProviderItem;
 import com.xkball.vista_railway.client.gui.screen.CatenaryLoadingScreen;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
 import com.xkball.vista_railway.network.packets.OpenCatenaryGuiPacket;
 import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
+import com.xkball.vista_railway.registration.VRItems;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,8 +22,12 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,7 +36,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PoleBlock extends BlockContainer {
     
-    public static ResourceLocation ID = new ResourceLocation(VistaRailway.MOD_ID,"pole");
+    public static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0,0,0,0,0,0);
+    public static final ResourceLocation ID = new ResourceLocation(VistaRailway.MOD_ID,"pole");
     
     public PoleBlock() {
         super(Material.ANVIL);
@@ -57,7 +65,7 @@ public class PoleBlock extends BlockContainer {
     
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(worldIn.isRemote){
+        if(worldIn.isRemote && !(playerIn.getHeldItemMainhand().getItem() instanceof IOverlayProviderItem)){
             if(!CatenaryDataManager.INSTANCE.init){
                 GCNetworkManager.INSTANCE.sendPacketToServer(new RequestCatenaryDataPacket());
                 Minecraft.getMinecraft().displayGuiScreen(new CatenaryLoadingScreen(pos));
@@ -70,7 +78,73 @@ public class PoleBlock extends BlockContainer {
                 }
             
             }
+            return true;
         }
+        return false;
+    }
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isTranslucent(IBlockState state) {
         return true;
     }
+    
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+    
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+    
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+    
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+        return true;
+    }
+    
+    @Nullable
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return Block.NULL_AABB;
+    }
+    
+//    @Override
+//    @SuppressWarnings("deprecation")
+//    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+//        return EMPTY_AABB;
+//    }
+//
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+//        if(worldIn.isRemote){
+//            var player = Minecraft.getMinecraft().player;
+//            if(player.getHeldItemMainhand().getItem() != VRItems.POLE_BLOCK_ITEM && player.getHeldItemOffhand().getItem() != VRItems.POLE_BLOCK_ITEM){
+//                return EMPTY_AABB;
+//            }
+//        }
+        return Block.FULL_BLOCK_AABB;
+    }
+    
+    @Override
+    @SuppressWarnings("deprecation")
+    @SideOnly(Side.CLIENT)
+    public float getAmbientOcclusionLightValue(IBlockState state)
+    {
+        return 1.0F;
+    }
+    
 }
