@@ -8,7 +8,6 @@ import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
 import com.xkball.vista_railway.network.packets.OpenCatenaryGuiPacket;
 import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
-import com.xkball.vista_railway.registration.VRItems;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -36,7 +35,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PoleBlock extends BlockContainer {
     
-    public static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0,0,0,0,0,0);
     public static final ResourceLocation ID = new ResourceLocation(VistaRailway.MOD_ID,"pole");
     
     public PoleBlock() {

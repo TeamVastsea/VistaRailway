@@ -1,9 +1,7 @@
 package com.xkball.vista_railway.client.global;
 
-import com.xkball.vista_railway.VistaRailway;
 import com.xkball.vista_railway.utils.func.FloatFunction;
 import com.xkball.vista_railway.utils.func.FloatUnaryOperator;
-import it.unimi.dsi.fastutil.floats.Float2ObjectFunction;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
@@ -13,7 +11,6 @@ import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class Line {
     private final List<LineNode> nodes = new ArrayList<>();

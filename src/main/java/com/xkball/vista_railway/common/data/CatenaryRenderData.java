@@ -3,8 +3,6 @@ package com.xkball.vista_railway.common.data;
 import com.xkball.vista_railway.client.global.Line;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.utils.MathUtils;
-import com.xkball.vista_railway.utils.func.FloatFunction;
-import com.xkball.vista_railway.utils.func.FloatUnaryOperator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Vector3f;
@@ -70,7 +68,7 @@ public class CatenaryRenderData {
             }
             if(t && b){
                 int n = (int) (Vector3f.sub(startPointTop[i],endPointTop[i],new Vector3f()).length())/5;
-                float d = 1f/(n+1);
+                float d = 1f/ (n+1);
                 for (int j = 0; j < n+1; j++) {
                     lines.add(new Line(tl.positionAt(d*j),bl.positionAt(d*j),f->0,2,8,0.045f));
                 }
