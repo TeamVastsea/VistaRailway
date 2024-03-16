@@ -34,4 +34,7 @@ vista_railway.tooltip.configurable_hud.column=使用鼠标滚轮选择列
 vista_railway.item.binder=绑定器
 
 key.category.vista_railway=Vista Railway
-vista_railway.catenary.name.default=默认
+vista_railway.catenary.name.default=默认1
+vista_railway.catenary.name.default2=默认2
+vista_railway.catenary.name.default3=默认3
+vista_railway.catenary.name.default4=默认4

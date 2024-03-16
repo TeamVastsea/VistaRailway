@@ -1,8 +1,12 @@
 package com.xkball.vista_railway.common.te;
 
+import com.xkball.vista_railway.common.data.CatenaryDataManager;
+import com.xkball.vista_railway.common.data.CatenaryRenderData;
 import com.xkball.vista_railway.common.data.PoleTEData;
+import com.xkball.vista_railway.utils.MathUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
@@ -11,14 +15,22 @@ import org.lwjgl.util.vector.Vector3f;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.Set;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class PoleTE extends VRBaseTE {
 
     public PoleTEData data = new PoleTEData();
+    public CatenaryRenderData renderData = new CatenaryRenderData();
+    public final Set<BlockPos> needNotify = new HashSet<>();
     public PoleTE(){
     
+    }
+    
+    public boolean hasStyle(){
+        return CatenaryDataManager.INSTANCE.get(data.styleID) != null;
     }
     
     @Override
@@ -31,6 +43,28 @@ public class PoleTE extends VRBaseTE {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         data.readFromNBT(compound);
+        renderData.needUpdate = true;
+        if(this.hasWorld() ){
+            if(this.getWorld().isRemote && !needNotify.isEmpty()){
+                for (BlockPos blockPos : needNotify) {
+                    var te = this.getWorld().getTileEntity(blockPos);
+                    if(te instanceof PoleTE poleTE){
+                        poleTE.renderData.needUpdate = true;
+                    }
+                }
+            }
+            else if(!this.getWorld().isRemote){
+                renderData.updateServer(this);
+            }
+        }
+    }
+    
+    @Override
+    public void markDirty() {
+        if(!this.getWorld().isRemote){
+            renderData.updateServer(this);
+        }
+        super.markDirty();
     }
     
     @Override
@@ -54,6 +88,7 @@ public class PoleTE extends VRBaseTE {
         if(state == 0)return;
         data.relativePos[id] = state == 1;
         this.markDirty();
+        this.sentDataToClient(SAVE);
     }
     
     public void setOffset(Vector3f offset){
@@ -61,4 +96,21 @@ public class PoleTE extends VRBaseTE {
         this.markDirty();
         this.sentDataToClient(SAVE);
     }
+    
+    @Nullable
+    public Vector3f getOffsetTop(int nodeID){
+        var offset = new Vector3f(this.data.offset).translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
+        var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
+        if(nodeMap.get(nodeID) == null) return null;
+        return Vector3f.add(offset, MathUtils.rotate(new Vector3f(nodeMap.get(nodeID).topOffset()), EnumFacing.Axis.Y, data.yRotation),offset);
+    }
+    
+    @Nullable
+    public Vector3f getOffsetBottom(int nodeID){
+        var offset = new Vector3f(this.data.offset).translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
+        var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
+        if(nodeMap.get(nodeID) == null) return null;
+        return Vector3f.add(offset,MathUtils.rotate(new Vector3f(nodeMap.get(nodeID).bottomOffset()), EnumFacing.Axis.Y, data.yRotation),offset);
+    }
+    
 }

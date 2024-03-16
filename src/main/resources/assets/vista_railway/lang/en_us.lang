@@ -34,4 +34,7 @@ vista_railway.tooltip.configurable_hud.column=Use mouse wheel to choose columns.
 vista_railway.item.binder=Binder
 
 key.category.vista_railway=Vista Railway
-vista_railway.catenary.name.default=Default
+vista_railway.catenary.name.default=Default 1
+vista_railway.catenary.name.default2=Default 2
+vista_railway.catenary.name.default3=Default 3
+vista_railway.catenary.name.default4=Default 4

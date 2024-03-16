@@ -16,6 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
 
+import static com.xkball.vista_railway.common.te.VRBaseTE.SAVE;
+
 public class OpenCatenaryGuiPacket implements GCPacket {
     private boolean updateServer = false;
     public boolean closeGUI = false;
@@ -56,6 +58,7 @@ public class OpenCatenaryGuiPacket implements GCPacket {
             if(updateServer){
                 pe.data.readFromNBT(data);
                 pe.markDirty();
+                pe.sentDataToClient(SAVE);
             }
             if(!closeGUI){
                 GCNetworkManager.INSTANCE.sendPacketToPlayer(new OpenCatenaryGuiPacket(pe),player);

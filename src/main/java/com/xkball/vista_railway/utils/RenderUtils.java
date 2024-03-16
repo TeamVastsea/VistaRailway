@@ -21,35 +21,38 @@ public class RenderUtils {
     public static final ResourceLocation ITEM_OVERLAY_BG = new ResourceLocation(VistaRailway.MOD_ID,"textures/item_overlay_bg.png");
     
     public static void renderRGBCube(BufferBuilder buffer, double size){
-        buffer.pos(0,0,0).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,size,0).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(size,size,0).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,0,0).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        var r = clientCurrentRed();
+        var g = clientCurrentGreen();
+        var b = clientCurrentBlue();
+        buffer.pos(0,0,0).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(0,size,0).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(size,size,0).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(size,0,0).tex(1,0).color(b,r,g,255).endVertex();
         
-        buffer.pos(0,0,size).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,size,size).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(size,size,size).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,0,size).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        buffer.pos(0,0,size).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(0,size,size).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(size,size,size).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(size,0,size).tex(1,0).color(b,r,g,255).endVertex();
         
-        buffer.pos(0,0,0).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,0,size).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(0,size,size).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,size,0).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        buffer.pos(0,0,0).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(0,0,size).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(0,size,size).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(0,size,0).tex(1,0).color(b,r,g,255).endVertex();
         
-        buffer.pos(size,0,0).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,0,size).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(size,size,size).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,size,0).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        buffer.pos(size,0,0).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(size,0,size).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(size,size,size).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(size,size,0).tex(1,0).color(b,r,g,255).endVertex();
         
-        buffer.pos(0,0,0).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,0,size).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(size,0,size).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,0,0).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        buffer.pos(0,0,0).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(0,0,size).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(size,0,size).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(size,0,0).tex(1,0).color(b,r,g,255).endVertex();
         
-        buffer.pos(0,size,0).tex(0,0).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(0,size,size).tex(0,1).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
-        buffer.pos(size,size,size).tex(1,1).color(clientCurrentRed(),clientCurrentGreen(),clientCurrentBlue(),255).endVertex();
-        buffer.pos(size,size,0).tex(1,0).color(clientCurrentBlue(),clientCurrentRed(),clientCurrentGreen(),255).endVertex();
+        buffer.pos(0,size,0).tex(0,0).color(r,g,b,255).endVertex();
+        buffer.pos(0,size,size).tex(0,1).color(b,r,g,255).endVertex();
+        buffer.pos(size,size,size).tex(1,1).color(r,g,b,255).endVertex();
+        buffer.pos(size,size,0).tex(1,0).color(b,r,g,255).endVertex();
     }
     
     public static void drawItemOverlayBG(int x,int y,int w,int h,int r,int g,int b,int a){

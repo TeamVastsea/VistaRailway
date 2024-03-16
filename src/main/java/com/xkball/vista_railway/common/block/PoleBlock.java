@@ -64,6 +64,19 @@ public class PoleBlock extends BlockContainer {
     }
     
     @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        var te = worldIn.getTileEntity(pos);
+        if(te instanceof PoleTE poleTE){
+                for (BlockPos blockPos : poleTE.needNotify) {
+                if(worldIn.getTileEntity(blockPos) instanceof PoleTE poleTE1){
+                    poleTE1.sentDataToClient(PoleTE.SAVE);
+                }
+            }
+        }
+        super.breakBlock(worldIn, pos, state);
+    }
+    
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(worldIn.isRemote && !(playerIn.getHeldItemMainhand().getItem() instanceof IOverlayProviderItem)){
             if(!CatenaryDataManager.INSTANCE.init){

@@ -88,7 +88,7 @@ public class CatenaryDataManager {
     
     
     public void genDefaultConfig(Path path) throws IOException {
-        var modelData = new ModelData("1.obj",1d,new Quaternion(0,0,0,0),new Vector3f(0,0,0));
+        var modelData = new ModelData("1",1d,new Quaternion(0,0,0,0),new Vector3f(0,0,0));
         var catenaryNodeData = new CatenaryNodeData(0,new Vector3f(0,0,0),new Vector3f(0,0,0));
         var catenaryNodeData2 = new CatenaryNodeData(1,new Vector3f(0,0,0),new Vector3f(0,0,0));
         var catenaryNodeData3 = new CatenaryNodeData(2,new Vector3f(0,0,0),new Vector3f(0,0,0));

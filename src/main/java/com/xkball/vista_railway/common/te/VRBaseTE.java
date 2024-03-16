@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 @MethodsReturnNonnullByDefault
 public class VRBaseTE extends TileEntity implements ITickable {
     protected boolean firstTick = true;
-    protected static Consumer<VRBaseTE> SAVE = VRBaseTE::getUpdateTag;
+    public static Consumer<VRBaseTE> SAVE = VRBaseTE::getUpdateTag;
     
     protected NBTTagCompound updateTag  = new NBTTagCompound();
     
