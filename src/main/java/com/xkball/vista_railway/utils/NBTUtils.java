@@ -3,7 +3,6 @@ package com.xkball.vista_railway.utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.util.vector.Vector3f;
 
 import javax.annotation.Nullable;
 
@@ -33,9 +32,9 @@ public class NBTUtils {
     }
     
     public static void writeVec3f(NBTTagCompound compound, String name, Vector3f vec3f){
-        compound.setFloat(name+"_x",vec3f.getX());
-        compound.setFloat(name+"_y",vec3f.getY());
-        compound.setFloat(name+"_z",vec3f.getZ());
+        compound.setFloat(name+"_x",vec3f.x);
+        compound.setFloat(name+"_y",vec3f.y);
+        compound.setFloat(name+"_z",vec3f.z);
     }
     
     @Nullable

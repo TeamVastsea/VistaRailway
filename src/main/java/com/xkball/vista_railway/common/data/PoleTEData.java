@@ -1,8 +1,9 @@
 package com.xkball.vista_railway.common.data;
 
+import com.xkball.vista_railway.utils.Vector3f;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.util.vector.Vector3f;
+
 
 import static com.xkball.vista_railway.utils.NBTUtils.readBlockPos;
 import static com.xkball.vista_railway.utils.NBTUtils.writeBlockPos;

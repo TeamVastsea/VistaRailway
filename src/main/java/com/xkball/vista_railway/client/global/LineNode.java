@@ -86,10 +86,11 @@ public class LineNode {
     
     //效果存疑
     public void fixFacing(Vector3f facing){
-        if(facing.x == 0 && facing.y < 0){
-            facing.y = -facing.y;
-        }
-        else if(facing.y == 0 && facing.x < 0){
+//        if(facing.x == 0 && facing.y < 0){
+//            facing.y = -facing.y;
+//        }
+        //else
+        if(facing.y == 0 && facing.x < 0){
             facing.x = -facing.x;
         }
     }

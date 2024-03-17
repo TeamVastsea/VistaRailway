@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatenaryRenderData {
-    public final Vector3f[] startPointTop = new Vector3f[4];
-    public final Vector3f[] endPointTop = new Vector3f[4];
-    public final Vector3f[] startPointBottom= new Vector3f[4];
-    public final Vector3f[] endPointBottom= new Vector3f[4];
     public final List<Line> lines = new ArrayList<>();
     
     public boolean needUpdate = true;
@@ -23,7 +19,12 @@ public class CatenaryRenderData {
     
     }
     
+    @SideOnly(Side.CLIENT)
     public void readFromTE(PoleTE te){
+        Vector3f[] startPointTop = new Vector3f[4];
+        Vector3f[] endPointTop = new Vector3f[4];
+        Vector3f[] startPointBottom= new Vector3f[4];
+        Vector3f[] endPointBottom= new Vector3f[4];
         if(!te.hasWorld() || !te.getWorld().isRemote) return;
         this.needUpdate = false;
         var style = CatenaryDataManager.INSTANCE.get(te.data.styleID);
@@ -57,13 +58,13 @@ public class CatenaryRenderData {
             Line tl = null;
             Line bl = null;
             if(t){
-                tl = new Line(startPointTop[i],endPointTop[i], f->0f,5,6,0.05f);
+                var l = Vector3f.sub(endPointTop[i],startPointTop[i],new Vector3f()).length();
+                tl = new Line(startPointTop[i],endPointTop[i], MathUtils.createCatenary(5,l/6), (int) (l*4),8,0.045f);
                 lines.add(tl);
                 //lines.add(new Line(startPointTop[i],endPointTop[i],50,6,0.05f, f-> new Vector3f(0f, (float) Math.cos(f*8),(float) Math.sin(f*8)*0.5f)));
             }
             if(b){
-                var l = Vector3f.sub(endPointBottom[i],startPointBottom[i],new Vector3f()).length();
-                bl = new Line(startPointBottom[i],endPointBottom[i], MathUtils.createCatenary(5,l/6), (int) (l*4),8,0.045f);
+                bl = new Line(startPointBottom[i],endPointBottom[i], f->0f,5,6,0.05f);
                 lines.add(bl);
             }
             if(t && b){

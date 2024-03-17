@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class KeyBoardInputHandler {
     public static final KeyBinding ITEM_SWITCH_MODE = new KeyBinding("vista_railway.hot_key.item_switch_mode",
             KeyConflictContext.IN_GAME, KeyModifier.NONE, Keyboard.KEY_TAB, "key.category.vista_railway");

@@ -3,7 +3,6 @@ package com.xkball.vista_railway.client.gui.overlay;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.utils.NBTUtils;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,13 +12,20 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class ConfigurableOverlay extends Gui {
+public class ConfigurableOverlay {
+    
+    public static final Supplier<List<Pair<String,Integer>>> STYLE_LIST =
+            () -> CatenaryDataManager.INSTANCE.catenaryDataList
+                    .stream()
+                    .map(s -> Pair.of("vista_railway.catenary.name."+s.name(),s.id()))
+                    .collect(Collectors.toList());
     public static final ConfigurableOverlay BINDER = new ConfigurableOverlay()
             .addRow(new OverlayRow("catenary_style",true)
                     .setRenderString("vista_railway.gui.style_selection")
-                    .addAll(CatenaryDataManager.INSTANCE.catenaryDataList.stream().map(s -> Pair.of("vista_railway.catenary.name."+s.name(),s.id())).collect(Collectors.toList())))
+                    .addAll(STYLE_LIST.get()))
             .addRow(new OverlayRow("node",true)
                     .setRenderString("vista_railway.gui.connecting_node")
                     .addOverlayColumn(new OverlayColumn().setRenderString("vista_railway.gui.1"))

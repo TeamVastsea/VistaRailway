@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Vector3f;
 
+
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
@@ -91,26 +92,32 @@ public class PoleTE extends VRBaseTE {
         this.sentDataToClient(SAVE);
     }
     
-    public void setOffset(Vector3f offset){
+    public void setOffset(com.xkball.vista_railway.utils.Vector3f offset){
         data.offset = offset;
         this.markDirty();
         this.sentDataToClient(SAVE);
     }
     
     @Nullable
+    @SideOnly(Side.CLIENT)
     public Vector3f getOffsetTop(int nodeID){
-        var offset = new Vector3f(this.data.offset).translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
+        var offset = this.data.offset.toVec3f().translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
         var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
         if(nodeMap.get(nodeID) == null) return null;
-        return Vector3f.add(offset, MathUtils.rotate(new Vector3f(nodeMap.get(nodeID).topOffset()), EnumFacing.Axis.Y, data.yRotation),offset);
+        return Vector3f.add(offset, MathUtils.rotate(nodeMap.get(nodeID).topOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
     }
     
     @Nullable
+    @SideOnly(Side.CLIENT)
     public Vector3f getOffsetBottom(int nodeID){
-        var offset = new Vector3f(this.data.offset).translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
+        var offset = this.data.offset.toVec3f().translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
         var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
         if(nodeMap.get(nodeID) == null) return null;
-        return Vector3f.add(offset,MathUtils.rotate(new Vector3f(nodeMap.get(nodeID).bottomOffset()), EnumFacing.Axis.Y, data.yRotation),offset);
+        return Vector3f.add(offset,MathUtils.rotate(nodeMap.get(nodeID).bottomOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
     }
     
+    @Override
+    public double getMaxRenderDistanceSquared() {
+        return 1000000d;
+    }
 }

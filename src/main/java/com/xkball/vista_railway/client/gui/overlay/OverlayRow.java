@@ -40,6 +40,15 @@ public class OverlayRow {
         return this;
     }
     
+    public void rebuild(List<Pair<String,Integer>> list){
+        columnList.clear();
+        list.sort(Comparator.comparingInt(Pair::getRight));
+        for (var pair : list) {
+            this.addOverlayColumn(new OverlayColumn()
+                    .setRenderString(pair.getLeft()));
+        }
+    }
+    
     public OverlayRow addOverlayColumn(OverlayColumn buttonColumn){
         columnList.add(buttonColumn);
         buttonColumn.setRenderID(columnList.size());

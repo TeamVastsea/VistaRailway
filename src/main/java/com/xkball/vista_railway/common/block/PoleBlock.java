@@ -76,6 +76,14 @@ public class PoleBlock extends BlockContainer {
     
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(worldIn.isRemote){
+            activatedClient(worldIn,playerIn,pos);
+            return true;
+        }
+        return false;
+    }
+    @SideOnly(Side.CLIENT)
+    public void activatedClient(World worldIn, EntityPlayer playerIn, BlockPos pos){
         if(worldIn.isRemote && !(playerIn.getHeldItemMainhand().getItem() instanceof IOverlayProviderItem)){
             if(!CatenaryDataManager.INSTANCE.init){
                 GCNetworkManager.INSTANCE.sendPacketToServer(new RequestCatenaryDataPacket());
@@ -87,11 +95,9 @@ public class PoleBlock extends BlockContainer {
                 if(te instanceof PoleTE pe){
                     GCNetworkManager.INSTANCE.sendPacketToServer(new OpenCatenaryGuiPacket(pe));
                 }
-            
+                
             }
-            return true;
         }
-        return false;
     }
     
     @SuppressWarnings("deprecation")

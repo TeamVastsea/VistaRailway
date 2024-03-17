@@ -1,6 +1,7 @@
 package com.xkball.vista_railway.network.packets;
 
 import com.google.common.base.Charsets;
+import com.xkball.vista_railway.client.gui.overlay.ConfigurableOverlay;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.network.GCNetworkManager;
 import com.xkball.vista_railway.network.GCPacket;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class RequestCatenaryDataPacket implements GCPacket {
     
@@ -44,6 +46,7 @@ public class RequestCatenaryDataPacket implements GCPacket {
     public void onClient(EntityPlayer player) {
         if(!CatenaryDataManager.INSTANCE.init){
             CatenaryDataManager.INSTANCE.loadFromString(data);
+            Objects.requireNonNull(ConfigurableOverlay.BINDER.getRow("catenary_style")).rebuild(ConfigurableOverlay.STYLE_LIST.get());
         }
     }
 }

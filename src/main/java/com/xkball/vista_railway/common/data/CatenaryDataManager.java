@@ -5,12 +5,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.xkball.vista_railway.utils.Final;
 import com.xkball.vista_railway.utils.JsonUtils;
+import com.xkball.vista_railway.utils.Quaternion;
+import com.xkball.vista_railway.utils.Vector3f;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.apache.logging.log4j.LogManager;
-import org.lwjgl.util.vector.Quaternion;
-import org.lwjgl.util.vector.Vector3f;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -2,6 +2,7 @@ package com.xkball.vista_railway.client.renderer;
 
 import com.xkball.vista_railway.VistaRailway;
 import com.xkball.vista_railway.api.item.IPoleRenderable;
+import com.xkball.vista_railway.client.global.ConsistenceVertexBufferUploader;
 import com.xkball.vista_railway.client.gui.VRModelManager;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.data.ModelData;
@@ -10,10 +11,10 @@ import com.xkball.vista_railway.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldVertexBufferUploader;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -25,6 +26,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class PoleRender extends TileEntitySpecialRenderer<PoleTE> {
     public static final ResourceLocation WHITE = new ResourceLocation(VistaRailway.MOD_ID,"textures/block/white.png");
+    public static final WorldVertexBufferUploader bufferUploader = new ConsistenceVertexBufferUploader();
     
     @Override
     public void render(@Nullable PoleTE te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -39,18 +41,13 @@ public class PoleRender extends TileEntitySpecialRenderer<PoleTE> {
                 var style = CatenaryDataManager.INSTANCE.get(te.data.styleID);
                 for (ModelData modelData : style.rendering()) {
                     GlStateManager.pushMatrix();
-                    GlStateManager.scale(modelData.scale(),modelData.scale(),modelData.scale());
-                    GlStateManager.translate(modelData.offset().x,modelData.offset().y,modelData.offset().z);
                     GlStateManager.translate(te.data.offset.x,te.data.offset.y,te.data.offset.z);
-                    GlStateManager.rotate(modelData.rotation());
+                    GlStateManager.scale(modelData.scale(),modelData.scale(),modelData.scale());
+                    GlStateManager.rotate(modelData.rotation().toQuaternion());
                     GlStateManager.rotate(te.data.yRotation,0,1,0);
-                    var world = Minecraft.getMinecraft().world;
-                    var buffer = Tessellator.getInstance().getBuffer();
-                    buffer.begin(GL11.GL_QUADS,DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
-                    Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
-                            .renderModel(world, VRModelManager.INSTANCE.getModel(modelData.modelPath()),
-                                    world.getBlockState(te.getPos()), BlockPos.ORIGIN,buffer,false);
-                    Tessellator.getInstance().draw();
+                    GlStateManager.translate(modelData.offset().x,modelData.offset().y,modelData.offset().z);
+                    var buffer = VRModelManager.INSTANCE.getBuffer(modelData.modelPath());
+                    bufferUploader.draw(buffer);
                     GlStateManager.popMatrix();
                 }
             }
@@ -74,7 +71,7 @@ public class PoleRender extends TileEntitySpecialRenderer<PoleTE> {
             RenderUtils.renderRGBCube(buffer,size);
             Tessellator.getInstance().draw();
             if(te != null){
-                var offset = te.data.offset;
+                var offset = te.data.offset.toVec3f();
                 if (offset.lengthSquared()>0.2) {
                     buffer.begin(GL11.GL_QUADS,DefaultVertexFormats.POSITION_TEX_COLOR);
                     GlStateManager.translate(offset.x,offset.y,offset.z);

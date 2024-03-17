@@ -5,8 +5,9 @@ import com.google.gson.JsonObject;
 import com.xkball.vista_railway.utils.JsonSerializable;
 
 import com.xkball.vista_railway.utils.JsonUtils;
-import org.lwjgl.util.vector.Quaternion;
-import org.lwjgl.util.vector.Vector3f;
+import com.xkball.vista_railway.utils.Quaternion;
+import com.xkball.vista_railway.utils.Vector3f;
+
 
 @Desugar
 public record ModelData(String modelPath,

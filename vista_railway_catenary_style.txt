@@ -1,0 +1,243 @@
+[ //样式数组
+  {
+    "name": "default", //名称 对应本地化键为vista_railway.catenary.name.{{name}}
+    "id": 0, //id  影响排序
+    "nodeCount": 1, // 该样式的接触网数量 可用值1-4
+    "rendering": [ //模型渲染 为一个数组
+      {
+        "modelPath": "1", //模型名称 对应完整路径为 assets/vista_railway/models/block/{{modelPath}}.obj
+        "scale": 1.0, //渲染时候的缩放
+        "rotation": { //默认的旋转状态 注意这是个四元数
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "offset": { //相对于 被放置的位置+柱子里设置的位移 的位移
+          "x": -0.13,
+          "y": 6.5,
+          "z": 0.0
+        }
+      },
+      {
+        "modelPath": "2",
+        "scale": 1.0,
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "nodeData": {
+      "0": { //名称和id重复 序列化相关问题导致 请使用递增id 有效值1-4
+        "id": 0,
+        "topOffset": { //上方曲线相对于 被放置的位置+柱子里设置的位移 的位移
+          "x": -3.13,
+          "y": 7.25,
+          "z": 0.0
+        },
+        "bottomOffset": { //下方直线相对于 被放置的位置+柱子里设置的位移 的位移
+          "x": -3.13,
+          "y": 6.25,
+          "z": 0.0
+        }
+      }
+    }
+  },
+  {
+    "name": "default2",
+    "id": 1,
+    "nodeCount": 2,
+    "rendering": [
+      {
+        "modelPath": "1",
+        "scale": 1.0,
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "nodeData": {
+      "0": {
+        "id": 0,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "1": {
+        "id": 1,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  },
+  {
+    "name": "default3",
+    "id": 2,
+    "nodeCount": 3,
+    "rendering": [
+      {
+        "modelPath": "1",
+        "scale": 1.0,
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "nodeData": {
+      "0": {
+        "id": 0,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "2": {
+        "id": 2,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "1": {
+        "id": 1,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  },
+  {
+    "name": "default4",
+    "id": 3,
+    "nodeCount": 4,
+    "rendering": [
+      {
+        "modelPath": "1",
+        "scale": 1.0,
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "nodeData": {
+      "0": {
+        "id": 0,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "2": {
+        "id": 2,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "1": {
+        "id": 1,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "3": {
+        "id": 3,
+        "topOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "bottomOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  }
+]

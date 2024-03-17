@@ -100,7 +100,7 @@ public class CatenaryEditScreen extends VRBaseScreen {
         
         var rightX = width/5+width/40;
         offsetEdit = new Vector3fEditField(this,rightX,85,40,15,20);
-        offsetEdit.init(teData.offset);
+        offsetEdit.init(teData.offset.toVec3f());
         this.addComponent(offsetEdit);
         
         yRotationEdit = new IntSlideBar(this,rightX,
@@ -126,7 +126,7 @@ public class CatenaryEditScreen extends VRBaseScreen {
     }
     
     protected void saveOffsetAndNode(){
-        teData.offset = offsetEdit.get();
+        teData.offset.set(offsetEdit.get());
         for(int i = 0;i<teData.connections.length;i++){
             if(blockPosNodes[i] != null){
                 teData.connections[i] = blockPosNodes[i].get();

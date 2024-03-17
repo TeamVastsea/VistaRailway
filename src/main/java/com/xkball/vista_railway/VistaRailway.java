@@ -6,6 +6,8 @@ import com.xkball.vista_railway.client.renderer.PoleRender;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
+import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -14,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,11 +38,16 @@ public class VistaRailway {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         GCNetworkManager.init();
+    }
+    
+    @Mod.EventHandler
+    @SideOnly(Side.CLIENT)
+    public void initClient(FMLInitializationEvent event){
         KeyBoardInputHandler.init();
     }
     
-    @Mod.EventBusSubscriber
-    public static class ModEventHandler{
+    @Mod.EventBusSubscriber(Side.CLIENT)
+    public static class ModEventHandlerClient{
         
         
         @SubscribeEvent
@@ -54,8 +62,20 @@ public class VistaRailway {
             if(event.phase == TickEvent.Phase.START) clientTick++;
         }
         
-        
+       
     }
+    @Mod.EventBusSubscriber(Side.SERVER)
+    public static class ModEventHandler{
+        @SubscribeEvent
+        public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event){
+            if(event.player instanceof EntityPlayerMP playerMP){
+                GCNetworkManager.INSTANCE.sendPacketToPlayer(new RequestCatenaryDataPacket(),playerMP);
+            }
+            
+        }
+    }
+    
+    
     @Mod.EventHandler
     public static void onServerStart(FMLServerStartedEvent event){
         CatenaryDataManager.INSTANCE.loadFromDirectory(new File(configDir.getPath()+"/vista_railway_catenary_style.json").toPath());
