@@ -5,10 +5,10 @@
   "target": "@env(DEFAULT)",
   "refmap": "mixins.vista_railway.refmap.json",
   "mixins": [
-
   ],
   "client": [
-    "VRMixinGUIInGame"
+    "VRMixinBlockModelRendererAccess",
+    "VRMixinForgeBlockModelRendererAccess"
   ],
   "server": [
   ],

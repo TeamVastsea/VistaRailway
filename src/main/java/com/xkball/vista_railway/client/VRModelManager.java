@@ -1,8 +1,11 @@
-package com.xkball.vista_railway.client.gui;
+package com.xkball.vista_railway.client;
 
 import com.xkball.vista_railway.VistaRailway;
+import com.xkball.vista_railway.mixin.VRMixinBlockModelRendererAccess;
 import com.xkball.vista_railway.registration.VRBlocks;
+import com.xkball.vista_railway.utils.FixedLightBlockAccess;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -19,6 +22,8 @@ public class VRModelManager {
     private static final Map<String, BufferBuilder> buffers = new HashMap<>();
     
     public static VRModelManager INSTANCE = new VRModelManager();
+    
+    public static BlockModelRenderer MODEL_RENDERER = null;
     
     private VRModelManager(){
     
@@ -37,11 +42,16 @@ public class VRModelManager {
     public BufferBuilder getBuffer(String name){
         var result = buffers.get(name);
         if (result != null) return result;
+        if(MODEL_RENDERER == null){
+            var rawRender = (VRMixinBlockModelRendererAccess)Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
+            MODEL_RENDERER = new VRBlockModelRenderer(rawRender.getBlockColors());
+            //MODEL_RENDERER = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
+            
+        }
         var buffer = new BufferBuilder(131072);
         buffer.begin(GL11.GL_QUADS,DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
         var world = Minecraft.getMinecraft().world;
-        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
-                .renderModel(world, getModel(name),
+        MODEL_RENDERER.renderModel(new FixedLightBlockAccess(world,15), getModel(name),
                         VRBlocks.POLE_BLOCK.getDefaultState(), BlockPos.ORIGIN,buffer,false);
         buffer.finishDrawing();
         buffers.put(name,buffer);

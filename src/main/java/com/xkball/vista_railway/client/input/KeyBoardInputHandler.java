@@ -28,8 +28,8 @@ public class KeyBoardInputHandler {
     @SubscribeEvent
     public static void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (ITEM_SWITCH_MODE.isPressed()) {
-            var itemInhand = Minecraft.getMinecraft().player.getHeldItemMainhand();
-            if (itemInhand.getItem() instanceof IKeyBoardInputRespond respond && respond.canRespondTo(itemInhand,ITEM_SWITCH_MODE)) {
+            var itemInHand = Minecraft.getMinecraft().player.getHeldItemMainhand();
+            if (itemInHand.getItem() instanceof IKeyBoardInputRespond respond && respond.canRespondTo(itemInHand,ITEM_SWITCH_MODE)) {
                 GCNetworkManager.INSTANCE.sendPacketToServer(new KeyBoardInputToServerPacket(ITEM_SWITCH_MODE.getKeyCode(),Minecraft.getMinecraft().player.getHeldItemMainhand()));
             }
         }

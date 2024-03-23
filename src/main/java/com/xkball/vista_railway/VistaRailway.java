@@ -1,14 +1,17 @@
 package com.xkball.vista_railway;
 
 
+import com.xkball.vista_railway.api.item.IOverlayProviderItem;
 import com.xkball.vista_railway.client.input.KeyBoardInputHandler;
 import com.xkball.vista_railway.client.renderer.PoleRender;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
 import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -50,6 +53,7 @@ public class VistaRailway {
     public static class ModEventHandlerClient{
         
         
+        
         @SubscribeEvent
         @SideOnly(Side.CLIENT)
         public static void modelRegistryEvent(ModelRegistryEvent event) {
@@ -60,6 +64,20 @@ public class VistaRailway {
         @SideOnly(Side.CLIENT)
         public static void onClientTick(TickEvent.ClientTickEvent event){
             if(event.phase == TickEvent.Phase.START) clientTick++;
+        }
+        
+        @SubscribeEvent
+        @SideOnly(Side.CLIENT)
+        public static void onDrawGuiOverlay(RenderGameOverlayEvent.Pre event){
+            if(event.getType() == RenderGameOverlayEvent.ElementType.ALL){
+                var player = Minecraft.getMinecraft().player;
+                if (player != null) {
+                    var itemStack = player.getHeldItemMainhand();
+                    if (itemStack.getItem() instanceof IOverlayProviderItem iOverlayProviderItem) {
+                        iOverlayProviderItem.renderOverlay(Minecraft.getMinecraft(),itemStack,0);
+                    }
+                }
+            }
         }
         
        

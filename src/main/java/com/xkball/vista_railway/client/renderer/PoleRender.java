@@ -3,7 +3,7 @@ package com.xkball.vista_railway.client.renderer;
 import com.xkball.vista_railway.VistaRailway;
 import com.xkball.vista_railway.api.item.IPoleRenderable;
 import com.xkball.vista_railway.client.global.ConsistenceVertexBufferUploader;
-import com.xkball.vista_railway.client.gui.VRModelManager;
+import com.xkball.vista_railway.client.VRModelManager;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.data.ModelData;
 import com.xkball.vista_railway.common.te.PoleTE;
