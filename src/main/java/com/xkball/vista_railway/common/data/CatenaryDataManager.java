@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.apache.logging.log4j.LogManager;
+import org.spongepowered.include.com.google.common.base.Charsets;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -44,7 +45,9 @@ public class CatenaryDataManager {
                 genDefaultConfig(path);
             }
             else {
-                var contents = new String(Files.readAllBytes(path));
+                //j8就没这个方法
+                @SuppressWarnings("ReadWriteStringCanBeUsed")
+                var contents = new String(Files.readAllBytes(path), Charsets.UTF_8);
                 data.set(contents);
                 loadFromString(contents);
             }

@@ -19,6 +19,7 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+@SuppressWarnings("DuplicatedCode")
 @ParametersAreNonnullByDefault
 public class VRBlockModelRenderer extends ForgeBlockModelRenderer {
     public VRBlockModelRenderer(BlockColors colors) {
