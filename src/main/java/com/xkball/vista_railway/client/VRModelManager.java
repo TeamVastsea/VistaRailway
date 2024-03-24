@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
@@ -32,11 +33,20 @@ public class VRModelManager {
     public IBakedModel getModel(String name){
         var result = models.get(name);
         if(result != null) return result;
-        var rawModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(VistaRailway.MOD_ID,"block/"+name+".obj"));
-        var model = rawModel.bake(rawModel.getDefaultState(), DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL,
-                (r) -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(r.toString()));
-        models.put(name,model);
-        return model;
+        try {
+            var rawModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(VistaRailway.MOD_ID,"block/"+name+".obj"));
+            var model = rawModel.bake(rawModel.getDefaultState(), DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL,
+                    (r) -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(r.toString()));
+            models.put(name,model);
+            return model;
+        }catch (Exception e){
+            if("empty".equals(name)){
+                throw new RuntimeException("it shouldn't fail to load,is the mod file broken?");
+            }
+            LogManager.getLogger().error("happened error when loading model " +VistaRailway.MOD_ID+"block/"+name+".obj" );
+            LogManager.getLogger().error(e);
+        }
+        return getModel("empty");
     }
     
     public BufferBuilder getBuffer(String name){
@@ -46,7 +56,6 @@ public class VRModelManager {
             var rawRender = (VRMixinBlockModelRendererAccess)Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
             MODEL_RENDERER = new VRBlockModelRenderer(rawRender.getBlockColors());
             //MODEL_RENDERER = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
-            
         }
         var buffer = new BufferBuilder(131072);
         buffer.begin(GL11.GL_QUADS,DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);

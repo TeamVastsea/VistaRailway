@@ -3,7 +3,6 @@ package com.xkball.vista_railway.common.item.contain_overlay;
 import com.xkball.vista_railway.VistaRailway;
 import com.xkball.vista_railway.api.item.IPoleRenderable;
 import com.xkball.vista_railway.client.gui.overlay.ConfigurableOverlay;
-import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.utils.NBTUtils;
 import mcp.MethodsReturnNonnullByDefault;
@@ -61,14 +60,14 @@ public class BinderItem extends BaseOverlayItem implements IPoleRenderable{
                 return EnumActionResult.SUCCESS;
             }
             else if (te instanceof PoleTE poleTE ) {
-                var catenaryStyleRow = ConfigurableOverlay.BINDER.getRow("catenary_style");
+                //var catenaryStyleRow = ConfigurableOverlay.BINDER.getRow("catenary_style");
                 var nodeRow = ConfigurableOverlay.BINDER.getRow("node");
                 var overrideRow = ConfigurableOverlay.BINDER.getRow("node_override");
-                assert catenaryStyleRow != null && nodeRow != null && overrideRow != null;
-                if(catenaryStyleRow.getCurrentSelected() == 0 || nodeRow.getCurrentSelected() == 0 || overrideRow.getCurrentSelected() == 0)  return EnumActionResult.FAIL;
+                assert /*catenaryStyleRow != null && */nodeRow != null && overrideRow != null;
+                if(/*catenaryStyleRow.getCurrentSelected() == 0 || */nodeRow.getCurrentSelected() == 0 || overrideRow.getCurrentSelected() == 0)  return EnumActionResult.FAIL;
                 poleTE.overrideRelativePosSetting(nodeRow.getCurrentSelected()-1,overrideRow.getCurrentSelected()-1);
                 poleTE.setNodeConnection(nodeRow.getCurrentSelected()-1,NBTUtils.readBlockPosOrNull(posRow.getColumnList().get(0).tempTag,"pos"));
-                poleTE.data.styleID = CatenaryDataManager.INSTANCE.catenaryDataList.get(catenaryStyleRow.getCurrentSelected()-1).id();
+                //poleTE.data.styleID = CatenaryDataManager.INSTANCE.catenaryDataList.get(catenaryStyleRow.getCurrentSelected()-1).id();
                 poleTE.markDirty();
                 return EnumActionResult.SUCCESS;
             }

@@ -23,9 +23,9 @@ public class ConfigurableOverlay {
                     .map(s -> Pair.of("vista_railway.catenary.name."+s.name(),s.id()))
                     .collect(Collectors.toList());
     public static final ConfigurableOverlay BINDER = new ConfigurableOverlay()
-            .addRow(new OverlayRow("catenary_style",true)
-                    .setRenderString("vista_railway.gui.style_selection")
-                    .addAll(STYLE_LIST.get()))
+//            .addRow(new OverlayRow("catenary_style",true)
+//                    .setRenderString("vista_railway.gui.style_selection")
+//                    .addAll(STYLE_LIST.get()))
             .addRow(new OverlayRow("node",true)
                     .setRenderString("vista_railway.gui.connecting_node")
                     .addOverlayColumn(new OverlayColumn().setRenderString("vista_railway.gui.1"))

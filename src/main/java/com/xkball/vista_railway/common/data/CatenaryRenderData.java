@@ -70,7 +70,7 @@ public class CatenaryRenderData {
             if(t && b){
                 int n = (int) (Vector3f.sub(startPointTop[i],endPointTop[i],new Vector3f()).length())/5;
                 float d = 1f/ (n+1);
-                for (int j = 0; j < n+1; j++) {
+                for (int j = 1; j < n+1; j++) {
                     lines.add(new Line(tl.positionAt(d*j),bl.positionAt(d*j),f->0,2,8,0.045f));
                 }
             }
