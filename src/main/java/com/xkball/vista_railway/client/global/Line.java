@@ -1,7 +1,7 @@
 package com.xkball.vista_railway.client.global;
 
 import com.xkball.vista_railway.utils.func.FloatFunction;
-import com.xkball.vista_railway.utils.func.FloatUnaryOperator;
+import com.xkball.vista_railway.utils.func.LineCreator;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,11 +27,14 @@ public class Line {
      * @param sideCount the number of vertex of each sample point,affects rendering performance.
      * @param radius the radius of the line.
      */
-    public Line(Vector3f start, Vector3f end, FloatUnaryOperator line, int samplesCount, int sideCount, double radius){
-        this(start,end,samplesCount,sideCount,radius, (f)->new Vector3f(0,line.applyAsFloat(f),0));
+    public Line(Vector3f start, Vector3f end, LineCreator line, int samplesCount, int sideCount, double radius){
+        this(start,end,samplesCount,sideCount,radius,line.createLine(new com.xkball.vista_railway.utils.Vector3f(start),new com.xkball.vista_railway.utils.Vector3f(end)));
+    }
+    public Line(Vector3f start, Vector3f end, int samplesCount, int sideCount, double radius, FloatFunction<com.xkball.vista_railway.utils.Vector3f> line){
+        this(start,end,samplesCount,sideCount,(f) -> line.apply(f).toVec3f(),radius);
     }
     
-    public Line(Vector3f start, Vector3f end, int samplesCount, int sideCount, double radius, FloatFunction<Vector3f> line){
+    public Line(Vector3f start, Vector3f end, int samplesCount, int sideCount, FloatFunction<Vector3f> line, double radius){
         this.start = start;
         this.end = end;
         this.line = line;

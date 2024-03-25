@@ -1,6 +1,7 @@
 package com.xkball.vista_railway.utils;
 
 import com.xkball.vista_railway.VistaRailway;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -11,7 +12,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 import static com.xkball.vista_railway.utils.ColorUtils.ClientColorUtils.*;
 
@@ -20,6 +25,7 @@ public class RenderUtils {
     
     public static final ResourceLocation ITEM_OVERLAY_BG = new ResourceLocation(VistaRailway.MOD_ID,"textures/item_overlay_bg.png");
     
+    public static final Object2ObjectMap<String,Pair<Boolean,ResourceLocation>> hasTexture = new Object2ObjectLinkedOpenHashMap<>();
     public static void renderRGBCube(BufferBuilder buffer, double size){
         var r = clientCurrentRed();
         var g = clientCurrentGreen();
@@ -107,5 +113,26 @@ public class RenderUtils {
     
     public static String getRenderString(String unl10nStr){
         return I18n.hasKey(unl10nStr)?I18n.format(unl10nStr):unl10nStr;
+    }
+    
+    public static void bindOBJTexture(String path){
+        if(hasTexture.containsKey(path)){
+            var v = hasTexture.get(path);
+            if(v.getLeft()){
+                Minecraft.getMinecraft().renderEngine.bindTexture(v.getRight());
+            }
+        }
+        else {
+            var resourceManager = Minecraft.getMinecraft().getResourceManager();
+            var rl = new ResourceLocation(VistaRailway.MOD_ID,"models/block/"+path+".png");
+            try {
+                resourceManager.getResource(rl);
+                hasTexture.put(path,Pair.of(true,rl));
+            } catch (IOException e) {
+                LogManager.getLogger().info("FileNotFound: models/block/"+path+".png. should model have no texture?");
+                hasTexture.put(path,Pair.of(false,rl));
+            }
+            
+        }
     }
 }

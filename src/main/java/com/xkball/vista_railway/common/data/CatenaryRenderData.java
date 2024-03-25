@@ -53,28 +53,35 @@ public class CatenaryRenderData {
             }
         }
         for (int i = 0; i < 4; i++) {
-            var t = startPointTop[i] != null && endPointTop[i] != null;
-            var b = startPointBottom[i] != null && endPointBottom[i] != null;
+            var node = CatenaryDataManager.INSTANCE.get(te.data.styleID).nodeMap().get(i);
+            if(node == null) continue;
+            var lineType = node.lineType();
+            var t = startPointTop[i] != null && endPointTop[i] != null && lineType.getTop().enable;
+            var b = startPointBottom[i] != null && endPointBottom[i] != null && lineType.getBottom().enable;
             Line tl = null;
             Line bl = null;
             if(t){
-                var l = Vector3f.sub(endPointTop[i],startPointTop[i],new Vector3f()).length();
-                tl = new Line(startPointTop[i],endPointTop[i], MathUtils.createCatenary(5,l/6), (int) (l*4),8,0.045f);
-                lines.add(tl);
+                tl = addLine(startPointTop[i],endPointTop[i],lineType.getTop());
                 //lines.add(new Line(startPointTop[i],endPointTop[i],50,6,0.05f, f-> new Vector3f(0f, (float) Math.cos(f*8),(float) Math.sin(f*8)*0.5f)));
             }
             if(b){
-                bl = new Line(startPointBottom[i],endPointBottom[i], f->0f,5,6,0.05f);
-                lines.add(bl);
+                bl = addLine(startPointBottom[i],endPointBottom[i],lineType.getBottom());
             }
-            if(t && b){
+            if(t && b && lineType == LineType.T1){
                 int n = (int) (Vector3f.sub(startPointTop[i],endPointTop[i],new Vector3f()).length())/5;
                 float d = 1f/ (n+1);
                 for (int j = 1; j < n+1; j++) {
-                    lines.add(new Line(tl.positionAt(d*j),bl.positionAt(d*j),f->0,2,8,0.045f));
+                    lines.add(new Line(tl.positionAt(d*j),bl.positionAt(d*j), MathUtils.LineFormat.None.offset,2,6,0.02f));
                 }
             }
         }
+    }
+    
+    public Line addLine(Vector3f start,Vector3f end,MathUtils.LineFormat format){
+        var l = Vector3f.sub(end,start,new Vector3f()).length();
+        var bl = new Line(start,end,format.offset, format.samples.apply(l),6,format.radius);
+        lines.add(bl);
+        return bl;
     }
     
     public void updateServer(PoleTE te){

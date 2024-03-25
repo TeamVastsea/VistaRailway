@@ -46,6 +46,7 @@ public class PoleRender extends TileEntitySpecialRenderer<PoleTE> {
                     GlStateManager.rotate(modelData.rotation().toQuaternion());
                     GlStateManager.rotate(te.data.yRotation,0,1,0);
                     GlStateManager.translate(modelData.offset().x,modelData.offset().y,modelData.offset().z);
+                    RenderUtils.bindOBJTexture(modelData.modelPath());
                     var buffer = VRModelManager.INSTANCE.getBuffer(modelData.modelPath());
                     bufferUploader.draw(buffer);
                     GlStateManager.popMatrix();

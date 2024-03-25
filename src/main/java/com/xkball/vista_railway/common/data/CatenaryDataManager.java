@@ -92,10 +92,10 @@ public class CatenaryDataManager {
     
     public void genDefaultConfig(Path path) throws IOException {
         var modelData = new ModelData("1",1d,new Quaternion(0,0,0,0),new Vector3f(0,0,0));
-        var catenaryNodeData = new CatenaryNodeData(0,new Vector3f(0,0,0),new Vector3f(0,0,0));
-        var catenaryNodeData2 = new CatenaryNodeData(1,new Vector3f(0,0,0),new Vector3f(0,0,0));
-        var catenaryNodeData3 = new CatenaryNodeData(2,new Vector3f(0,0,0),new Vector3f(0,0,0));
-        var catenaryNodeData4 = new CatenaryNodeData(3,new Vector3f(0,0,0),new Vector3f(0,0,0));
+        var catenaryNodeData = new CatenaryNodeData(0,new Vector3f(0,0,0),new Vector3f(0,0,0),LineType.T1);
+        var catenaryNodeData2 = new CatenaryNodeData(1,new Vector3f(0,0,0),new Vector3f(0,0,0),LineType.T1);
+        var catenaryNodeData3 = new CatenaryNodeData(2,new Vector3f(0,0,0),new Vector3f(0,0,0),LineType.T1);
+        var catenaryNodeData4 = new CatenaryNodeData(3,new Vector3f(0,0,0),new Vector3f(0,0,0),LineType.T1);
         var catenaryStyleData = new CatenaryStyleData("default",0, ImmutableList.of(modelData),1, Int2ObjectMaps.singleton(0,catenaryNodeData));
         var map2 = new Int2ObjectOpenHashMap<CatenaryNodeData>();
         var map3 = new Int2ObjectOpenHashMap<CatenaryNodeData>();

@@ -4,7 +4,7 @@ import com.xkball.vista_railway.client.gui.Button;
 import com.xkball.vista_railway.client.gui.Renderable;
 import com.xkball.vista_railway.client.gui.screen.VRBaseScreen;
 import com.xkball.vista_railway.utils.ColorUtils;
-import com.xkball.vista_railway.utils.MathUtils;
+import com.xkball.vista_railway.utils.MathUtilsClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiTextField;
@@ -44,7 +44,7 @@ public class IntSlideBar extends Gui implements Renderable {
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.interval = maxValue-minValue;
-        initValue = MathUtils.clamp(initValue,minValue,maxValue);
+        initValue = MathUtilsClient.clamp(initValue,minValue,maxValue);
         this.value = initValue-minValue;
         textField = new GuiTextField(screen.nextID(),screen.mc.fontRenderer,
                 x+wBar+wInterval,y,wTextField,h){
@@ -173,7 +173,7 @@ public class IntSlideBar extends Gui implements Renderable {
             }
             if(dragging){
                 _x = oldX+mouseX-oldMouseX;
-                _x = MathUtils.clamp(_x,x,x+wBar);
+                _x = MathUtilsClient.clamp(_x,x,x+wBar);
                 value = (int)(((float)(_x - x)/(float)wBar)*interval);
                 textField.setText(Integer.toString(getValue()));
             }

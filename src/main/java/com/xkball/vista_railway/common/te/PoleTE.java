@@ -3,7 +3,7 @@ package com.xkball.vista_railway.common.te;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
 import com.xkball.vista_railway.common.data.CatenaryRenderData;
 import com.xkball.vista_railway.common.data.PoleTEData;
-import com.xkball.vista_railway.utils.MathUtils;
+import com.xkball.vista_railway.utils.MathUtilsClient;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -104,7 +104,7 @@ public class PoleTE extends VRBaseTE {
         var offset = this.data.offset.toVec3f().translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
         var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
         if(nodeMap.get(nodeID) == null) return null;
-        return Vector3f.add(offset, MathUtils.rotate(nodeMap.get(nodeID).topOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
+        return Vector3f.add(offset, MathUtilsClient.rotate(nodeMap.get(nodeID).topOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
     }
     
     @Nullable
@@ -113,7 +113,7 @@ public class PoleTE extends VRBaseTE {
         var offset = this.data.offset.toVec3f().translate(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ());
         var nodeMap = CatenaryDataManager.INSTANCE.get(data.styleID).nodeMap();
         if(nodeMap.get(nodeID) == null) return null;
-        return Vector3f.add(offset,MathUtils.rotate(nodeMap.get(nodeID).bottomOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
+        return Vector3f.add(offset, MathUtilsClient.rotate(nodeMap.get(nodeID).bottomOffset().toVec3f(), EnumFacing.Axis.Y, data.yRotation),offset);
     }
     
     @Override

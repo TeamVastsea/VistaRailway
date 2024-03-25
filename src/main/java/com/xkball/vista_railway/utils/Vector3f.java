@@ -6,6 +6,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Vector3f {
     
     public float x, y, z;
+    public Vector3f(){
+        this(0,0,0);
+    }
+    
     public Vector3f(float x, float y, float z) {
         set(x, y, z);
     }
@@ -44,5 +48,18 @@ public class Vector3f {
     @Override
     public String toString() {
         return "Vector3f[" + x + ", " + y + ", " + z + ']';
+    }
+    
+    public static Vector3f sub(Vector3f left, Vector3f right, Vector3f dest) {
+        if (dest == null)
+            return new Vector3f(left.x - right.x, left.y - right.y, left.z - right.z);
+        else {
+            dest.set(left.x - right.x, left.y - right.y, left.z - right.z);
+            return dest;
+        }
+    }
+    
+    public float length() {
+        return (float) Math.sqrt(x*x+y*y+z*z);
     }
 }
