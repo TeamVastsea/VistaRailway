@@ -8,13 +8,13 @@ import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.network.GCNetworkManager;
 import com.xkball.vista_railway.network.packets.OpenCatenaryGuiPacket;
 import com.xkball.vista_railway.network.packets.RequestCatenaryDataPacket;
+import com.xkball.vista_railway.registration.Register;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -40,7 +40,7 @@ public class PoleBlock extends BlockContainer {
     public PoleBlock() {
         super(Material.ANVIL);
         this.setRegistryName(ID);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setCreativeTab(Register.VR_TAB);
         this.setTranslationKey("vista_railway.block.pole");
     }
     @Override

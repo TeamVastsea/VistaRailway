@@ -29,6 +29,11 @@ vista_railway.gui.translator.offset=当前位移
 vista_railway.tooltip.configurable_hud=这个物品有可配置的HUD
 vista_railway.tooltip.configurable_hud.row=使用 %s 键选择行
 vista_railway.tooltip.configurable_hud.column=使用鼠标滚轮选择列
+vista_railway.item_action.binder.bind0=成功设置目标
+vista_railway.item_action.binder.bind1=成功清除目标
+vista_railway.item_action.binder.bind2=绑定失败,绑定节点或者保存模式覆盖未设置
+vista_railway.item_action.binder.bind3=成功绑定
+
 
 
 vista_railway.item.binder=绑定器

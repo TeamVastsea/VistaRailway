@@ -43,7 +43,9 @@ public class VRModelManager {
             if("empty".equals(name)){
                 throw new RuntimeException("it shouldn't fail to load,is the mod file broken?");
             }
-            LogManager.getLogger().error("happened error when loading model " +VistaRailway.MOD_ID+"block/"+name+".obj" );
+            ClientMessageManager.INSTANCE.warn("Error happened  when loading model " +VistaRailway.MOD_ID+":block/"+name+".obj");
+            ClientMessageManager.INSTANCE.warn(e.getMessage());
+            LogManager.getLogger().error("Error happened  when loading model " +VistaRailway.MOD_ID+":block/"+name+".obj" );
             LogManager.getLogger().error(e);
         }
         return getModel("empty");

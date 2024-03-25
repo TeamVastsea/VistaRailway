@@ -2,6 +2,7 @@ package com.xkball.vista_railway;
 
 
 import com.xkball.vista_railway.api.item.IOverlayProviderItem;
+import com.xkball.vista_railway.client.ClientMessageManager;
 import com.xkball.vista_railway.client.input.KeyBoardInputHandler;
 import com.xkball.vista_railway.client.renderer.PoleRender;
 import com.xkball.vista_railway.common.data.CatenaryDataManager;
@@ -63,7 +64,10 @@ public class VistaRailway {
         @SubscribeEvent
         @SideOnly(Side.CLIENT)
         public static void onClientTick(TickEvent.ClientTickEvent event){
-            if(event.phase == TickEvent.Phase.START) clientTick++;
+            if(event.phase == TickEvent.Phase.START){
+                clientTick++;
+                ClientMessageManager.INSTANCE.update();
+            }
         }
         
         @SubscribeEvent

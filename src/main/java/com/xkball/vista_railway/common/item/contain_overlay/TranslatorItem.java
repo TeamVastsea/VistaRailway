@@ -6,7 +6,6 @@ import com.xkball.vista_railway.client.gui.overlay.ConfigurableOverlay;
 import com.xkball.vista_railway.common.te.PoleTE;
 import com.xkball.vista_railway.utils.NBTUtils;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
@@ -14,6 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,7 +29,6 @@ public class TranslatorItem extends BaseOverlayItem implements IPoleRenderable {
         super(ID);
         this.setMaxStackSize(1);
         this.setTranslationKey("vista_railway.item.translator");
-        this.setCreativeTab(CreativeTabs.MISC);
     }
     
     @Override
@@ -48,9 +47,11 @@ public class TranslatorItem extends BaseOverlayItem implements IPoleRenderable {
                 var tag = getOverlay().getAdditionalData();
                 NBTUtils.writeBlockPos(tag,"pos",poleTE.getPos());
                 poleTE.setOffset(NBTUtils.readVec3f(Objects.requireNonNull(getOverlay().getRow("offset")).saveToNBT(new NBTTagCompound()).getCompoundTag("tag"),"pos"));
+                player.sendStatusMessage(new TextComponentTranslation("vista_railway.item_action.binder.bind0"),true);
             }
             else {
                 getOverlay().setAdditionalData(new NBTTagCompound());
+                player.sendStatusMessage(new TextComponentTranslation("vista_railway.item_action.binder.bind1"),true);
             }
             saveFromOverlay(itemInHand);
             return EnumActionResult.SUCCESS;

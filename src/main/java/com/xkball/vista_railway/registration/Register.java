@@ -1,10 +1,14 @@
 package com.xkball.vista_railway.registration;
 
+import com.xkball.vista_railway.VistaRailway;
 import com.xkball.vista_railway.common.block.PoleBlock;
 import com.xkball.vista_railway.common.te.PoleTE;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,7 +19,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Objects;
 
 @Mod.EventBusSubscriber
+@MethodsReturnNonnullByDefault
 public class Register {
+    
+    public static final CreativeTabs VR_TAB = new CreativeTabs(VistaRailway.MOD_ID+"_tab") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(VRItems.POLE_BLOCK_ITEM);
+        }
+    };
     
     @SubscribeEvent
     public static void onBlockReg(RegistryEvent.Register<Block> event){

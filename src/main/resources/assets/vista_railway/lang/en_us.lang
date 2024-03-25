@@ -29,6 +29,10 @@ vista_railway.gui.translator.offset=Current Offset:
 vista_railway.tooltip.configurable_hud=This item have configurable hud.
 vista_railway.tooltip.configurable_hud.row=Use %s key to choose rows.
 vista_railway.tooltip.configurable_hud.column=Use mouse wheel to choose columns.
+vista_railway.item_action.binder.bind0=Successfully set Target
+vista_railway.item_action.binder.bind1=Successfully clear Target
+vista_railway.item_action.binder.bind2=Binding failed,Connect Node or PosSaveModeOverride is not set
+vista_railway.item_action.binder.bind3=Successfully bound
 
 
 vista_railway.item.binder=Binder

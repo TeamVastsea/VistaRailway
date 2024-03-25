@@ -5,6 +5,7 @@ import com.xkball.vista_railway.api.item.IMouseWheelRespond;
 import com.xkball.vista_railway.api.item.IOverlayProviderItem;
 import com.xkball.vista_railway.client.input.KeyBoardInputHandler;
 import com.xkball.vista_railway.common.item.VRBaseItem;
+import com.xkball.vista_railway.registration.Register;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -28,6 +29,7 @@ public abstract class BaseOverlayItem extends VRBaseItem implements IOverlayProv
     
     public BaseOverlayItem(ResourceLocation id) {
         super(id);
+        this.setCreativeTab(Register.VR_TAB);
     }
     
     @Override

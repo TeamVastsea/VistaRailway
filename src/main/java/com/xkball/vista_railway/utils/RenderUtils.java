@@ -1,6 +1,7 @@
 package com.xkball.vista_railway.utils;
 
 import com.xkball.vista_railway.VistaRailway;
+import com.xkball.vista_railway.client.ClientMessageManager;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -129,7 +130,9 @@ public class RenderUtils {
                 resourceManager.getResource(rl);
                 hasTexture.put(path,Pair.of(true,rl));
             } catch (IOException e) {
-                LogManager.getLogger().info("FileNotFound: models/block/"+path+".png. should model have no texture?");
+                var str = "FileNotFound: models/block/"+path+".png. Should model have no texture?";
+                LogManager.getLogger().info(str);
+                ClientMessageManager.INSTANCE.debug(str);
                 hasTexture.put(path,Pair.of(false,rl));
             }
             
